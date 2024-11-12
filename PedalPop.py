@@ -16,10 +16,9 @@ class PedalPop(ContaUrbanBike):
         return "Você não tem saldo suficiente para pedalar."
 
     def creditar(self, valor):
-        if (valor > 0) {
+        if (valor > 0):
             self.saldo += valor
 
             return "Valor creditado com sucesso! Novo saldo: {self.saldo}."
-        }
 
         return "O valor do crédito precisa ser maior do que zero."
