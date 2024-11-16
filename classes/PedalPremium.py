@@ -22,7 +22,7 @@ class PedalPremium(ContaUrbanBike):
             if (self.saldo - valor >= -(self.limite)):
                 self.saldo -= valor
 
-                return "Pedalada executada com sucesso! Novo saldo: {self.saldo}."
+                return f"Pedalada executada com sucesso! Novo saldo: {self.saldo}."
 
             return 'Você não tem saldo suficiente ou limite disponível para pedalar.'
         except:
@@ -35,7 +35,7 @@ class PedalPremium(ContaUrbanBike):
             if (valor > 0):
                 self.saldo += valor
 
-                return "Valor creditado com sucesso! Novo saldo: {self.saldo}."
+                return f"Valor creditado com sucesso! Novo saldo: {self.saldo}."
 
             return 'O valor do crédito precisa ser maior do que zero.'
         except:
@@ -43,9 +43,9 @@ class PedalPremium(ContaUrbanBike):
 
     def mostrarDados(self):
         print(
-            'Exibindo dados da conta: \n\n',
-            "Número da Conta: {self.numeroConta}, \n",
+            '\nExibindo dados da conta: \n\n',
+            f"Número da Conta: {self.numeroConta}, \n",
             'Tipo: PedalPremium, \n',
-            "Saldo: {self.saldo}, \n",
-            "Limite: {self.limite}."
+            f"Saldo: {self.saldo}, \n",
+            f"Limite: {self.limite}."
         )

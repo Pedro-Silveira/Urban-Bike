@@ -20,11 +20,11 @@ class PedalPop(ContaUrbanBike):
             if (totalOperacao <= self.saldo):
                 self.saldo -= totalOperacao
 
-                return "Pedalada executada com sucesso! Novo saldo: {self.saldo}."
+                return f"\nPedalada executada com sucesso! Total da operação: {totalOperacao} (c/ taxa)."
             
-            return 'Você não tem saldo suficiente para pedalar.'
+            return '\nVocê não tem saldo suficiente para pedalar.'
         except:
-            return 'O valor informado é inválido!'
+            return '\nO valor informado é inválido!'
 
     def creditar(self, valor):
         try:
@@ -33,17 +33,17 @@ class PedalPop(ContaUrbanBike):
             if (valor > 0):
                 self.saldo += valor
 
-                return "Valor creditado com sucesso! Novo saldo: {self.saldo}."
+                return f"\nValor creditado com sucesso! Novo saldo: {self.saldo}."
 
-            return 'O valor do crédito precisa ser maior do que zero.'
+            return '\nO valor do crédito precisa ser maior do que zero.'
         except:
-            return 'O valor informado é inválido!'
+            return '\nO valor informado é inválido!'
 
     def mostrarDados(self):
         print(
-            'Exibindo dados da conta: \n\n',
-            "Número da Conta: {self.numeroConta}, \n",
+            '\nExibindo dados da conta: \n\n',
+            f"Número da Conta: {self.numeroConta}, \n",
             'Tipo: PedalPop, \n',
-            "Saldo: {self.saldo}, \n",
-            "Taxa de Operação: {self.taxaOperacao}."
+            f"Saldo: {self.saldo}, \n",
+            f"Taxa de Operação: {self.taxaOperacao}."
         )

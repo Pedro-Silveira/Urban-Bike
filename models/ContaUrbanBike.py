@@ -1,9 +1,9 @@
-from abc import ABC, abstractmethod
-from interfaces import Imprimivel
+from abc import abstractmethod
+from interfaces.Imprimivel import Imprimivel
 
-class ContaUrbanBike(ABC, Imprimivel):
+class ContaUrbanBike(Imprimivel):
     def __init__(self, numeroConta, saldo = 0.0):
-        self.numeroConta = numeroConta,
+        self.numeroConta = numeroConta
         self.saldo = saldo
 
     @abstractmethod

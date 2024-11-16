@@ -1,14 +1,12 @@
-from interfaces import Imprimivel
+class Ciclistas():
+    def __init__(self):
+        self.listaPedais = []
 
-class Ciclistas(Imprimivel):
-    def __init__(self, listaPedais: list):
-        self.listaPedais = listaPedais
-
-    def iserir(self, pedal):
+    def inserir(self, pedal):
         if (not self.listaPedais.__contains__(pedal)):
             self.listaPedais.append(pedal)
 
-            return 'O pedal foi inserido com sucesso.'
+            return '\nO pedal foi inserido com sucesso.'
 
         return 'Não é possível inserir o pedal pois ele já está na lista.'
 
@@ -21,10 +19,10 @@ class Ciclistas(Imprimivel):
         return 'Não é possível remover o pedal pois ele não está na lista.'
 
     def procurarPedal(self, idPedal):
-        if (self.listaPedais[idPedal]):
-            return self.listaPedais[idPedal]
+            idPedal = int(idPedal)
+            pedal   = next((obj for obj in self.listaPedais if obj.numeroConta == idPedal), None)
 
-        return 'Não foi encontrado um pedal com o ID informado.'
+            return pedal or '\nNão foi encontrado um pedal com o número da conta informado. \n'
 
     def listarPedais(self):
         for pedal in self.listaPedais:
