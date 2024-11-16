@@ -16,16 +16,22 @@ class ContaUrbanBike(Imprimivel):
         # Método para carregar créditos na carteira.
         pass
 
-    def transferir(self, valor, contaDestino):
+    def transferir(self, valor, contaOrigem, contaDestino):
         try:
-            valor = float(valor)
+            valor           = float(valor)
+            taxaOperacao    = float(getattr(contaOrigem, 'taxaOperacao', 0))
 
-            if (self.saldo >= valor):
-                self.pedalar(valor)
-                contaDestino.creditar(valor)
+            # Impede o usuário de realizar transferências com valores menores ou iguais a 0.
+            if (valor < 0):
+                return '\nO valor da transferência precisa ser maior do que zero.'
 
-                return 'Transferência realizada com sucesso.'
+            # Impede o usuário sem saldo suficiente de realizar transferências
+            if (contaOrigem.saldo < valor + taxaOperacao):
+                return '\nVocê não tem saldo suficiente para realizar esta transferência.'
 
-            return 'Você não tem saldo suficiente para executar essa transferência.'
+            contaOrigem.pedalar(valor)
+            contaDestino.creditar(valor)
+
+            return '\nTransferência realizada com sucesso.'
         except:
-            return 'O valor informado é inválido!'
+            return '\nO valor informado é inválido!'

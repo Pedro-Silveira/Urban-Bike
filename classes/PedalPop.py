@@ -2,20 +2,13 @@ from models.ContaUrbanBike import ContaUrbanBike
 
 class PedalPop(ContaUrbanBike):
     def __init__(self, numeroConta, saldo, taxaOperacao):
-        try:
-            numeroConta = int(numeroConta)
-            saldo = float(saldo)
-            taxaOperacao = float(taxaOperacao)
-
             super().__init__(numeroConta, saldo)
             self.taxaOperacao = taxaOperacao
-        except:
-            return 'Os valores informados para o cadastro da conta são inválidos.'
 
     def pedalar(self, valor):
         try:
-            valor = float(valor)
-            totalOperacao = valor + self.taxaOperacao
+            valor           = float(valor)
+            totalOperacao   = valor + self.taxaOperacao
 
             if (totalOperacao <= self.saldo):
                 self.saldo -= totalOperacao

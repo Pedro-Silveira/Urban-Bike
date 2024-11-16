@@ -28,10 +28,10 @@ class Main():
                 case '2':
                     print(self.removerPedal())
                 case '3':
-                    self.gerarRelatorio
+                    self.gerarRelatorio()
                 case '4':
                     idPedal = input('\nInforme o número da conta do pedal a ser selecionado: \n').strip()
-                    pedal = self.ciclistas.procurarPedal(idPedal)
+                    pedal   = self.ciclistas.procurarPedal(idPedal)
 
                     if isinstance(pedal, PedalPop) or isinstance(pedal, PedalPremium):
                         self.selecionarPedal(pedal)
@@ -57,41 +57,53 @@ class Main():
 
             match tipoPedal:
                 case '1':
-                    numeroConta = input('\nInforme o número da conta: \n')
-                    saldo = input('\nInforme o saldo da conta: \n')
-                    taxaOperacao = input('\nInforme a taxa de operação da conta: \n')
+                    numeroConta     = input('\nInforme o número da conta: \n')
+                    saldo           = input('\nInforme o saldo da conta: \n')
+                    taxaOperacao    = input('\nInforme a taxa de operação da conta: \n')
 
-                    pedal = PedalPop(numeroConta, saldo, taxaOperacao)
+                    try:
+                        numeroConta     = int(numeroConta)
+                        saldo           = float(saldo)
+                        taxaOperacao    = float(taxaOperacao)
 
-                    if (isinstance(pedal, PedalPop)):
+                        pedal = PedalPop(numeroConta, saldo, taxaOperacao)
+
                         print(self.ciclistas.inserir(pedal))
-
-                    print(pedal)
+                    except:
+                        print('\nOs valores informados para o cadastro da conta são inválidos.')
                 case '2':
                     numeroConta = input('\nInforme o número da conta: \n')
-                    saldo = input('\nInforme o saldo da conta: \n')
-                    limite = input('\nInforme o limite da conta: \n')
+                    saldo       = input('\nInforme o saldo da conta: \n')
+                    limite      = input('\nInforme o limite da conta: \n')
 
-                    pedal = PedalPremium(numeroConta, saldo, limite)
+                    try:
+                        numeroConta = int(numeroConta)
+                        saldo       = float(saldo)
+                        limite      = float(limite)
 
-                    if (isinstance(pedal, PedalPremium)):
-                        print(self.ciclistas.inserir(pedal))
+                        # Verifica se a conta se enquadra nas condições premium.
+                        if (saldo < 100):
+                            print('\nPara ser PedalPremium, você precisa creditar um mínimo de R$ 100,00 na carteira ao criar sua conta.')
+                        else:
+                            pedal = PedalPremium(numeroConta, saldo, limite)
 
-                    print(pedal)
+                            print(self.ciclistas.inserir(pedal))
+                    except:
+                        print('\nOs valores informados para o cadastro da conta são inválidos.')
                 case '3':
                     print('\nOperação cancelada... \n')
                 case _:
                     print('\nPor gentileza, informe uma opção válida!')
 
     def removerPedal(self):
-        idPedal = input('Informe o ID do pedal a ser excluído: \n').strip()
+        idPedal = input('\nInforme o número da conta do pedal a ser excluído: \n').strip()
 
         return self.ciclistas.remover(idPedal)
 
     def gerarRelatorio(self):
         self.ciclistas.listarPedais()
 
-    def selecionarPedal(self, pedal):
+    def selecionarPedal(self, pedal: PedalPop|PedalPremium):
         opcaoPedal = '0'
 
         while opcaoPedal != '5':
@@ -122,13 +134,19 @@ class Main():
                     contaDestino = self.ciclistas.procurarPedal(idPedal)
 
                     if isinstance(contaDestino, PedalPremium) or isinstance(contaDestino, PedalPop):
-                        print(pedal.transferir(valor, contaDestino))
+                        # Verifica se a conta destino e a conta origem não são a mesma conta.
+                        if (not pedal.numeroConta == contaDestino.numeroConta):
+                            print(pedal.transferir(valor, pedal, contaDestino))
+                        else:
+                            print('\nVocê não pode transferir dinheiro para si mesmo.')
 
-                    print(pedal)
+                    print(contaDestino)
                 case '4':
                     pedal.mostrarDados()
+                case '5':
+                    print('\nOperação cancelada... \n')
                 case _:
-                    print('\nPor gentileza, informe uma opção válida! \n')
+                    print('\nPor gentileza, informe uma opção válida!')
 
 if (__name__ == '__main__'):
     app = Main()
