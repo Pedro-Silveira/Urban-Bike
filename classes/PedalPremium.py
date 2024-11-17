@@ -9,6 +9,7 @@ class PedalPremium(ContaUrbanBike):
         try:
             valor = float(valor)
 
+            # Verificar se há saldo ou limite disponível suficientes para pedalar.
             if (self.saldo - valor >= -(self.limite)):
                 self.saldo -= valor
 
@@ -22,6 +23,7 @@ class PedalPremium(ContaUrbanBike):
         try:
             valor = float(valor)
 
+            # Verifica se o valor a ser creditado é maior que zero.
             if (valor > 0):
                 self.saldo += valor
 

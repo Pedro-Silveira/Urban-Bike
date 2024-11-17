@@ -3,8 +3,8 @@ from interfaces.Imprimivel import Imprimivel
 
 class ContaUrbanBike(Imprimivel):
     def __init__(self, numeroConta, saldo = 0.0):
-        self.numeroConta = numeroConta
-        self.saldo = saldo
+        self.numeroConta    = numeroConta
+        self.saldo          = saldo
 
     @abstractmethod
     def pedalar(self):

@@ -10,11 +10,12 @@ class PedalPop(ContaUrbanBike):
             valor           = float(valor)
             totalOperacao   = valor + self.taxaOperacao
 
+            # Verifica se o usuário possui saldo suficiente antes de pedalar.
             if (totalOperacao <= self.saldo):
                 self.saldo -= totalOperacao
 
                 return f"\nPedalada executada com sucesso! Total da operação: {totalOperacao} (c/ taxa)."
-            
+
             return '\nVocê não tem saldo suficiente para pedalar.'
         except:
             return '\nO valor informado é inválido!'
@@ -23,6 +24,7 @@ class PedalPop(ContaUrbanBike):
         try:
             valor = float(valor)
 
+            # Verifica se o valor a creditar é maior que zero.
             if (valor > 0):
                 self.saldo += valor
 

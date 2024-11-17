@@ -3,6 +3,7 @@ class Ciclistas():
         self.listaPedais = []
 
     def inserir(self, pedal):
+        # Verifica se já não existe um pedal cadastrado com o mesmo ID.
         if (isinstance(self.procurarPedal(pedal.numeroConta), str)):
             self.listaPedais.append(pedal)
 
@@ -13,6 +14,7 @@ class Ciclistas():
     def remover(self, idPedal):
         conta = self.procurarPedal(idPedal)
 
+        # Verifica se a conta existe para remover.
         if (not isinstance(conta, str)):
             self.listaPedais.remove(conta)
 
